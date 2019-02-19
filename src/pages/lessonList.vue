@@ -22,7 +22,7 @@
                                             {{smItem.name}}
                                         </div>
                                         <div class="right">
-                                            <img v-if="smItem.isRead == 1" src="../img/readed.png" alt="" srcset="">
+                                            <img v-if="smItem.isRead === '1'" src="../img/readed.png" alt="" srcset="">
                                             <img v-else src="../img/unRead.png" alt="" srcset="">
                                         </div>
                                     </li>
