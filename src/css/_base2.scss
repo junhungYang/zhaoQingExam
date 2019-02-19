@@ -1,0 +1,259 @@
+@import "_base.scss";
+/*base*/
+*{
+    margin:0;
+    padding:0;
+}
+h1, h2, h3, h4, h5, h6, ul, li,th{
+    list-style-type:none ;
+    font-weight: normal;
+}
+em,i,b{
+    font-style:normal;
+}
+b{
+    font-weight: bold;
+}
+a{
+    color: inherit;
+    text-decoration:none;
+    -webkit-tap-highlight-color:rgba(0,0,0,0);
+}
+ul,li{
+    list-style:none;
+}
+input, button{
+    font-size: inherit;
+    border: none;
+    background: none;
+    -webkit-appearance: none;
+    border-radius: 0;
+}
+
+*:focus {outline: none;}
+textarea {
+    font-size: inherit;
+    resize:none;
+}
+::-moz-placeholder{
+    color:#b4b4b4;
+}
+::-webkit-input-placeholder{
+    color:#b4b4b4;
+}
+:-ms-input-placeholder{
+    color:#b4b4b4;
+}
+.clearfix::after{
+    content:"";
+    display:block;
+    visibility:hidden;
+    height:0;
+    clear:both;
+}
+.bold{
+    font-weight:bold;
+}
+.flex{
+    display:-webkit-box;
+    display: -webkit-flex;
+    display: flex;
+}
+.flex-justify{
+    display:-webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+}
+html, body {
+    color: #353535;
+    min-height: 100vh;
+    max-width: 640px;
+    margin: 0 auto;
+    line-height: 1.15;
+    font-family: "PingFang SC","Microsoft YaHei",Arial,Helvetica,sans-serif;
+    -webkit-tap-highlight-color: transparent;
+}
+
+
+[v-cloak]{
+    display: none;
+}
+.bg-f5f5f5 {
+    background: #f5f5f5;
+}
+/* */
+.btn-a {
+    display: block;
+    width: 100%;
+    height: 4rem;
+    line-height: 4rem;
+    font-size: 1.5rem;
+    color: #fff;
+    text-align: center;
+    background: $cl-a;
+    border-radius: 0.5rem;
+}
+.btn-b {
+    display: inline-block;
+    height: 3.5rem;
+    line-height: 3.5rem;
+    width: 9.4rem;
+    font-size: 1.5rem;
+    color: #fff;
+    text-align: center;
+    background: $cl-a;
+    border-radius: 0.5rem;
+}
+.btn-c {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    height: 2.2rem;
+    font-size: 1.2rem;
+    line-height: 2.2rem;
+    padding: 0 0.7rem;
+    border-radius: 1.1rem;
+    color: $cl-b;
+    background: #fff;
+}
+.btn-c i {
+    vertical-align: top;
+    margin: 0 0.4rem 0 0;
+}
+.btn-d {
+    @extend .btn-a;
+    background: $cl-h;
+}
+.btn-a.disabled {
+    color: #fff;
+    background: #e8e8e8;
+}
+.checkbox {
+    display: none;
+    & + .checkbox-i {
+        display: inline-block;
+        vertical-align: middle;
+        width: 1rem;
+        height: 1rem;
+        background: url("../img/checkbox-i_02.png");
+        background-size: 100%;
+    }
+    &:checked + .checkbox-i {
+        background-image: url("../img/checkbox-i_01.png");
+    }
+}
+
+/* icons */
+.delete-i, .search-i, .lattice-i_02 {
+    display: inline-block;
+    width: 2rem;
+    height: 2rem;
+    background: url("../img/delete-i.png") no-repeat center;
+    background-size: 100%;
+    vertical-align: middle;
+}
+.search-i {
+    background-image: url("../img/search-i.png");
+}
+.lattice-i_02 {
+    background-image: url("../img/lattice-i_02.png");
+}
+
+
+.lock-i, .user-i_01, .wrongClt-i_01,
+.wrongClt-i_02, .exit-i, .paperPlane-i, .reset-i {
+    display: inline-block;
+    width: 2.5rem;
+    height: 2.5rem;
+    background: url("../img/lock-i.png") no-repeat center;
+    background-size: 100%;
+}
+.user-i_01 {
+    background-image: url("../img/user-i_01.png");
+}
+.user-i_02 {
+    background-image: url("../img/user-i_02.png");
+}
+.exit-i {
+    background-image: url("../img/exit-i.png");
+}
+.paperPlane-i {
+    background-image: url("../img/paperPlane-i.png");
+}
+.reset-i {
+    background-image: url("../img/reset-i.png");
+}
+
+.building-i, .card-i, .horn-i, .user-i_02 {
+    display: inline-block;
+    width: 3rem;
+    height: 3rem;
+    background: url("../img/user-i_02.png") no-repeat center;
+    background-size: 100%;
+}
+.building-i {
+    background-image: url("../img/building-i.png");
+}
+.card-i {
+    background-image: url("../img/card-i.png");
+}
+.horn-i {
+    background-image: url("../img/horn-i.png");
+}
+
+
+
+.test-i, .practice-i_02, .practice-i_03, .practice-i_01 {
+    display: block;
+    width: 4rem;
+    height: 4rem;
+    background: url("../img/test-i.png") no-repeat center;
+    background-size: 100%;
+}
+.practice-i_01 {
+    background-image: url("../img/practice-i_01.png");
+}
+.practice-i_02 {
+    background-image: url("../img/practice-i_02.png");
+}
+.practice-i_03 {
+    background-image: url("../img/practice-i_03.png");
+}
+
+
+
+.testRecord-i, .wrongReview-i, .arrowRight-i,
+.lattice-i {
+    display: inline-block;
+    vertical-align: middle;
+    width: 1.5rem;
+    height: 1.5rem;
+    background: url("../img/testRecord-i.png") no-repeat center;
+    background-size: 100%;
+}
+.wrongReview-i {
+    background-image: url("../img/wrongReview-i.png");
+}
+.lattice-i {
+    background-image: url("../img/lattice-i.png");
+}
+.arrowRight-i {
+    background-image: url("../img/arrowRight-i.png");
+}
+
+.exit-i {
+    background-size: 1.7rem;
+}
+.lattice-i {
+    background-size: 1rem;
+}
+.paperPlane-i {
+    background-size: 1.7rem;
+}
+.wrongClt-i_01 {
+    background-size: 2rem;
+}

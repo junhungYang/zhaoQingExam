@@ -1,0 +1,36 @@
+
+// general
+$cl-a: #0093e0;
+
+$cl-b: #26b7f4;
+$cl-c: #e4effe;
+$cl-d: #5ad571;
+$cl-e: #ff2400;
+$cl-f: #0093e0;
+/*
+// general
+$cl-a: #4b5eb2;
+$cl-b: #bad7ff;
+$cl-c: #e4effe;
+$cl-d: #5ad571;
+$cl-e: #ff2400;
+$cl-f: #39a8f6;
+*/
+// signUp
+$cl-g: #4bb4ff;
+$cl-h: #1a9bf1;
+
+// search
+$cl-i: #3db8fe;
+$padding: 6.25%;
+
+@mixin customSelect($url, $size) {
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  -moz-appearance:none;
+  appearance: none;
+  border: none;
+  background: url($url) no-repeat scroll 97% center transparent;
+  background-size: $size;
+  padding-right: $size * 1.5;
+}
