@@ -32,12 +32,12 @@ const store = new Vuex.Store({
             text: '',
             ok: null
         },
-        Store_actionLesson: {}
+        Store_activeLesson: {}
     },
     mutations: {
         Store_changeActiveLesson(state,payload) {
-            state.Store_actionLesson = payload
-            console.log(state.Store_actionLesson)
+            state.Store_activeLesson = payload
+            console.log(state.Store_activeLesson)
         },
         setLoginInfo (state, {id, name, token}) {
             state.loginInfo.id = id
