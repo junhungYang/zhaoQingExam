@@ -36,7 +36,8 @@ const store = new Vuex.Store({
     },
     mutations: {
         Store_changeActiveLesson(state,payload) {
-            state.Store_actionLesson = payload
+            if (payload.activeIndex >= 0) state.Store_actionLesson.activeIndex = payload.activeIndex
+            if (payload.activeList) state.Store_actionLesson.activeList = payload.activeList
             console.log(state.Store_actionLesson)
         },
         setLoginInfo (state, {id, name, token}) {

@@ -82,7 +82,7 @@ export default {
                 activeIndex: index
             }
             this.Store_changeActiveLesson(obj)
-            // this.$router()
+            this.$router.push('/lessonDetail')
         }
     }
 }
