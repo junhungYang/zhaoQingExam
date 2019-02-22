@@ -8,7 +8,7 @@
             <div class="right">
                 <div class="select">{{subjectList[subjectChecked].subjectName}}</div>
                 <select name="lessonSlt" v-model="subjectChecked">
-                    <option v-for="item,index in subjectList" :value="index">{{item.subjectName}}</option>
+                    <option v-for="item,index in subjectList" :value="index" @click="getSubjectId(item.subjectId)">{{item.subjectName}}</option>
                 </select>
             </div>
         </div>
@@ -48,6 +48,7 @@
 <script>
     import searchComp from '../../components/searchComp.vue'
     import pagination from '../../components/pagination.vue'
+    import {mapMutations} from 'vuex'
     export default {
         data () {
             return {
@@ -88,6 +89,10 @@
             }
         },
         methods: {
+            ...mapMutations(['Store_refreshSubjectIdWhenActive']),
+            getSubjectId(id) {
+                this.Store_refreshSubjectIdWhenActive(id)
+            },
             getSubjectList () {
                 base.ajax({
                     url: "common/signUp/getSignUpSubjectList",

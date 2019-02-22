@@ -4,7 +4,7 @@ import store from '../store'
 import router from '../router'
 let base = {
     url: process.env.NODE_ENV == 'production'
-        ? 'http://192.168.1.26:8081/xingyuan/'
+        ? 'http://zqjtjx.yukedaonline.com/zqjtjx/'
         : 'http://192.168.1.26:8081/xingyuan/',
     error: {
         status: '',
