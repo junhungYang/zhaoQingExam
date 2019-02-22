@@ -72,7 +72,7 @@
 			},
 			next() {
 				let isRead = this.activeList.every(item => {
-					return item.isRead === 1
+					return parseInt(item.isRead) === 1
 				})
 				if (this.activeIndex >= this.activeList.length - 1) {
 					if (isRead) {

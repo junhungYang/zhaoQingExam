@@ -6,7 +6,7 @@ const baseWebpackConfig = require('./webpack.base.conf.js')
 module.exports = merge(baseWebpackConfig,{
     output: {
         // publicPath: 'http://192.168.1.26:8081/xingyuan/mobile/dist/',  //输出时，使用的基路径,若项目不是在域名根目录时生产时需改为  ./dist/
-        publicPath: 'http://zqjtjx.yukedaonline.com/zqjtjx/mobile/index.html'
+        publicPath: 'http://zqjtjx.yukedaonline.com/zqjtjx/mobile/dist/'
     },
     module:{
         rules: [

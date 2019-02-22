@@ -63,6 +63,7 @@ const store = new Vuex.Store({
         },
         setSubjectChecked (state, subjectId) {
             state.subjectChecked = subjectId || Cookie.get('subjectChecked') || state.subjectList[0].subjectId
+            state.Store_subjectId = subjectId || Cookie.get('subjectChecked') || state.subjectList[0].subjectId
             // 处理cookie中的值无效时
             let isValid = true
             if (state.subjectList && state.subjectList.length) {

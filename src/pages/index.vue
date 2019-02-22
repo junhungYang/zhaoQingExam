@@ -180,7 +180,7 @@
 					this.$store.commit('showConfirm', {text: '请选择科目'})
 					return false
 				}
-				this.$router.push('/lessonList')
+				this.$router.push({path: '/lessonList'})
 			}
 		},
 		created() {

@@ -7,7 +7,6 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import store from './store'
 import Cookie from 'js-cookie'
-import lessonList from './pages/lessonList.vue'
 const index = r => require.ensure([], () => r(require('./pages/index.vue')), 'index')
 const myInfo = r => require.ensure([], () => r(require('./pages/myInfo.vue')), 'index')
 const pwChange = r => require.ensure([], () => r(require('./pages/pwChange.vue')), 'index')
@@ -22,6 +21,7 @@ const classInfo = r => require.ensure([], () => r(require('./pages/classInfo.vue
 const examSignUp = r => require.ensure([], () => r(require('./pages/examSignUp.vue')), 'index')
 const classDetail = r => require.ensure([], () => r(require('./pages/classDetail.vue')), 'index')
 const lessonDetail = r => require.ensure([], () => r(require('./pages/lessonDetail.vue')), 'index')
+const lessonList = r => require.ensure([], () => r(require('./pages/lessonList.vue')), 'index')
 
 
 /*
@@ -185,7 +185,7 @@ const router = new VueRouter({ // 创建 router 实例，然后传 `routes` 配�
 * */
 router.beforeEach((to, from, next) => {
     if (to.matched.some(record => record.meta.requiresAuth)) {  // 是否需要登录
-        if (logined()) {
+        if (!logined()) {
             next({
                 path: '/login'
             })
