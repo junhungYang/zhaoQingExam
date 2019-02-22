@@ -37,9 +37,9 @@
 <script>
 import axios from 'axios'
 import qs from 'qs'
-import {mapMutations} from 'vuex'
-const REQ_CHAPTER_LIST = '/api/zqjtjx/common/explanation/getChapter'
-const REQ_SECTION_LIST = '/api/zqjtjx/common/explanation/getExplanation'
+import {mapMutations,mapState} from 'vuex'
+const REQ_CHAPTER_LIST = 'http://zqjtjx.yukedaonline.com/zqjtjx/common/explanation/getChapter'
+const REQ_SECTION_LIST = 'http://zqjtjx.yukedaonline.com/zqjtjx/common/explanation/getExplanation'
 export default {
     data() {
         return {
@@ -47,7 +47,14 @@ export default {
         }
     },
     created() {
-        this.getChapterList()
+        if(this.Store_subjectId) {
+             this.getChapterList({subjectId:this.Store_subjectId})
+        }else {
+            this.$router.replace('/')
+        }
+    },
+    computed: {
+        ...mapState(['Store_subjectId'])
     },
     methods: {
         ...mapMutations(['Store_changeActiveLesson']),

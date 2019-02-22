@@ -21,6 +21,7 @@ const login = r => require.ensure([], () => r(require('./pages/login.vue')), 'in
 const classInfo = r => require.ensure([], () => r(require('./pages/classInfo.vue')), 'index')
 const examSignUp = r => require.ensure([], () => r(require('./pages/examSignUp.vue')), 'index')
 const classDetail = r => require.ensure([], () => r(require('./pages/classDetail.vue')), 'index')
+const lessonDetail = r => require.ensure([], () => r(require('./pages/lessonDetail.vue')), 'index')
 
 
 /*
@@ -125,6 +126,11 @@ const routes = [
     {
         path: '/lessonList',
         component: lessonList,
+        meta: {requiresAuth: true}
+    },
+    {
+        path: '/lessonDetail',
+        component: lessonDetail,
         meta: {requiresAuth: true}
     },
     /*

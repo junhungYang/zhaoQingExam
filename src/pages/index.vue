@@ -3,10 +3,10 @@
         <div class="topContainer">
             <div class="flex">
                 <div class="img-wrap">
-                    <img class="logo" src="../img/icon.png" alt="">
+                    <img class="logo" src="../img/LOGO.png" alt="">
                     <div class="text">
-                        <p>星源职业培训系统</p>
-                        <p>欢迎您的到来！</p>
+                        <p>交通技校培训考试系统</p>
+                        <p>欢迎{{studentName}}用户，您的到来！</p>
                     </div>
                 </div>
             </div>
@@ -51,6 +51,13 @@
                 {{subjectCheckedName}}
             </div>
         </div>
+        <router-link to="/lessonList" tag="div" class="lesson">
+            <img src="../img/lesson.png" alt="">
+            <div>
+                <p>课程详解</p>
+                <p>需要阅读全部章节才能进行考试</p>
+            </div>
+        </router-link>
         <div class="menu">
             <div class="row">
                 <router-link class="item" to="/practise?type=1">
@@ -81,6 +88,7 @@
                 </router-link>
             </div>
         </div>
+        <p class="exit" @click="exitLogin">退出当前用户</p>
         <popup-comp v-model="isShowPopup" @close="showPopup(!1)">
             <div class="sltPopup">
                 <div class="header">
@@ -96,22 +104,25 @@
                 <div class="submit" @click="submitSlt()">确定</div>
             </div>
         </popup-comp>
+        <confirm-comp :value="showConfirm" :text="exitText" @ok="sureExit" @close="cancelExit"></confirm-comp>
     </div>
 </template>
 
 <script>
     import popupComp from '../components/popupComp.vue'
+    import confirmComp from '../components/confirmComp.vue'
     export default {
         data () {
             return {
                 isShowPopup: false,
                 checked: '',
-                isAdmin: false
+                isAdmin: false,
+                showConfirm: false,
+	            exitText: '确定退出当前用户？'
             }
         },
         computed: {
             studentName () {
-                console.log(1);
                 return this.$store.state.loginInfo.name
             },
             subjectList () {
@@ -151,6 +162,17 @@
             },
             split (str) {
                 return str.replace(' ', '</br>')
+            },
+	        sureExit() {
+            	this.showConfirm = false
+                this.$router.replace('/login')
+                this.$store.commit('clearLoginInfo')
+            },
+	        cancelExit() {
+                this.showConfirm = false
+            },
+            exitLogin() {
+                this.showConfirm = true
             }
         },
         created () {
@@ -158,7 +180,8 @@
             this.$store.dispatch('getMyExamSignUp')
         },
         components: {
-            popupComp
+            popupComp,
+	        confirmComp
         }
     }
 </script>
@@ -178,8 +201,8 @@
                     display: flex;
                     justify-content: center;
                     width: 100%;
-                    background-image: url('../img/index_logo_bg.jpg');
-                    background-size: cover;
+                    /*background-image: url('../img/indexTop.png');*/
+                    /*background-size: cover;*/
                     display: flex;
                     .logo {
                         width: 7.15rem;
@@ -203,7 +226,7 @@
                             color: #fff;
                             padding-right: 3.6rem;
                             line-height: 2.3rem;
-                            text-align: right;
+                            text-align: center;
                         }
                         @media screen and (max-width: 374px) {
                             p {
@@ -354,6 +377,41 @@
                 height: 66.66%;
             }
         }
+    }
+    .lesson{
+        width: 93.75%;
+        height: 5rem;
+        box-shadow: 0 0.1rem 0.25rem #d4d4d4;
+        margin: 1rem auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        &>img{
+            width: 3.8rem;
+            height: 3.8rem;
+            margin-right: 1rem;
+        }
+        &>div{
+            font-weight: bold;
+            line-height: 1.8rem;
+            :first-child{
+                font-size: 1.4rem;
+                color: #747474;
+                margin-top: 0.3rem;
+            }
+            :last-child{
+                font-size: 1.2rem;
+                color: #cccccc;
+            }
+        }
+    }
+    .exit{
+        font-size: 1.4rem;
+        font-weight: bold;
+        color: #1584da;
+        text-align: center;
+        margin: 3rem 0;
+        text-decoration: underline;
     }
     .subjectSlt {
         display: flex;
