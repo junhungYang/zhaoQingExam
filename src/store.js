@@ -33,12 +33,8 @@ const store = new Vuex.Store({
             ok: null
         },
         Store_actionLesson: {},
-        Store_subjectId: ''
     },
     mutations: {
-        Store_refreshSubjectIdWhenActive(state,payload) {
-            state.Store_subjectId = payload
-        },
         Store_changeActiveLesson(state,payload) {
             if (payload.activeIndex >= 0) state.Store_actionLesson.activeIndex = payload.activeIndex
             if (payload.activeList) state.Store_actionLesson.activeList = payload.activeList

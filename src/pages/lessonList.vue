@@ -47,14 +47,14 @@ export default {
         }
     },
     created() {
-        if(this.Store_subjectId) {
-             this.getChapterList({subjectId:this.Store_subjectId})
+        if(this.subjectChecked) {
+             this.getChapterList({subjectId:this.subjectChecked})
         }else {
             this.$router.replace('/')
         }
     },
     computed: {
-        ...mapState(['Store_subjectId'])
+        ...mapState(['subjectChecked','loginInfo'])
     },
     methods: {
         ...mapMutations(['Store_changeActiveLesson']),
@@ -67,7 +67,8 @@ export default {
         getSectionList() {
             let newChapterList = JSON.parse(JSON.stringify(this.chapterBigList))
             let promiseList = newChapterList.map(item => {
-                return axios.post(REQ_SECTION_LIST,qs.stringify({id: item.id})).then(res => {
+                console.log(item)
+                return axios.post(REQ_SECTION_LIST,qs.stringify({chapterId: item.chapterId, studentId: this.loginInfo.id})).then(res => {
                     item.sectionList = res.data.data
                     item.spreadState = false
                 })
@@ -80,7 +81,6 @@ export default {
             }
         },
         navToHomePage() {
-            this.Store_changeActiveLesson()
             this.$router.push('/')
         },
         navToDetail(sectionList,index) {
@@ -150,24 +150,28 @@ export default {
                     width: 100%;
                     top: 0;
                     z-index: 5;
+                    display: flex;
+                    align-items: center;
                     span {
                         line-height: 4.17rem;
                         font-weight: bold;
                         font-size: 1.5rem;
                         color: #353535;
+                        flex: 1;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        padding-left: 1rem;
                     }
                     img {
-                        position: absolute;
-                        top: 50%;
-                        transform: translateY(-50%);
-                        right: 1rem;
                         transition: all .3s linear;
+                        padding: 0 1rem;
                     }
                     .up {
-                        transform: translateY(-50%) rotate(0deg);
+                        transform: rotate(0deg);
                     }
                     .down {
-                        transform: translateY(-50%) rotate(180deg)
+                        transform: rotate(180deg)
                     }
                 }
                 .smList-wrap {
