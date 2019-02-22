@@ -27,7 +27,7 @@
 	import axios from 'axios'
 	import qs from 'qs'
 
-	const REQ_LESSON_DETAIL = '/api/zqjtjx/common/explanation/getExplanationContent'
+	const REQ_LESSON_DETAIL = 'http://zqjtjx.yukedaonline.com/zqjtjx/common/explanation/getChapter'
 	export default {
 		data() {
 			return {

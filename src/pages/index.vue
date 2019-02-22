@@ -10,7 +10,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <!-- <div class="flex">
                 <router-link class="navItem" to="/myInfo">
                     <i class="user-i_02"></i>
@@ -25,7 +25,7 @@
                     <span>预约考试</span>
                 </router-link>
             </div> -->
-            
+
         </div>
         <div class="myExamSignUp" v-if="myExamSignUp.length > 0">
             <div class="header">
@@ -33,16 +33,16 @@
                 <button class="admin" @click="showAdmin(!isAdmin)">{{isAdmin ? '取消' : '管理'}}</button>
             </div>
             <ul class="content">
-               <li v-for="item in myExamSignUp">
-                   <p class="title">
-                       {{item.subjectName}}
-                   </p>
-                   <p class="date" v-html="split(item.examTime)">
-                   </p>
-                   <!--<transition name="slideRight">-->
-                       <a class="delete" v-show="isAdmin" @click="cancelBespeak(item.bespeakExamId)">取 消<br/>预 约</a>
-                   <!--</transition>-->
-               </li>
+                <li v-for="item in myExamSignUp">
+                    <p class="title">
+                        {{item.subjectName}}
+                    </p>
+                    <p class="date" v-html="split(item.examTime)">
+                    </p>
+                    <!--<transition name="slideRight">-->
+                    <a class="delete" v-show="isAdmin" @click="cancelBespeak(item.bespeakExamId)">取 消<br/>预 约</a>
+                    <!--</transition>-->
+                </li>
             </ul>
         </div>
         <div class="subjectSlt">
@@ -51,13 +51,13 @@
                 {{subjectCheckedName}}
             </div>
         </div>
-        <router-link to="/lessonList" tag="div" class="lesson">
+        <div @click="toLessonList" class="lesson">
             <img src="../img/lesson.png" alt="">
             <div>
                 <p>课程详解</p>
                 <p>需要阅读全部章节才能进行考试</p>
             </div>
-        </router-link>
+        </div>
         <div class="menu">
             <div class="row">
                 <router-link class="item" to="/practise?type=1">
@@ -109,94 +109,105 @@
 </template>
 
 <script>
-    import popupComp from '../components/popupComp.vue'
-    import confirmComp from '../components/confirmComp.vue'
-    export default {
-        data () {
-            return {
-                isShowPopup: false,
-                checked: '',
-                isAdmin: false,
-                showConfirm: false,
-	            exitText: '确定退出当前用户？'
-            }
-        },
-        computed: {
-            studentName () {
-                return this.$store.state.loginInfo.name
-            },
-            subjectList () {
-                return this.$store.state.subjectList
-            },
-            subjectChecked () {
-                return this.$store.state.subjectChecked
-            },
-            subjectCheckedName () {
-                var name = '.'
-                this.subjectList && this.subjectList.some((item) => {
-                    if (item.subjectId == this.subjectChecked) {
-                        name = item.subjectName
-                        return true
-                    }
-                })
-                return name
-            },
-            myExamSignUp () {
-                return this.$store.state.myExamSignUp || []
-            }
-        },
-        methods: {
-            showPopup (bool) {
-                this.isShowPopup = bool
-                this.checked = this.subjectChecked
-            },
-            submitSlt () {
-                this.$store.commit('setSubjectChecked', this.checked)
-                this.showPopup(!1)
-            },
-            showAdmin (bool) {
-                this.isAdmin = bool
-            },
-            cancelBespeak (id) {
-                this.$store.dispatch('cancelBespeak', id)
-            },
-            split (str) {
-                return str.replace(' ', '</br>')
-            },
-	        sureExit() {
-            	this.showConfirm = false
-                this.$router.replace('/login')
-                this.$store.commit('clearLoginInfo')
-            },
-	        cancelExit() {
-                this.showConfirm = false
-            },
-            exitLogin() {
-                this.showConfirm = true
-            }
-        },
-        created () {
-            this.$store.dispatch('getSubjectList')
-            this.$store.dispatch('getMyExamSignUp')
-        },
-        components: {
-            popupComp,
-	        confirmComp
-        }
-    }
+	import popupComp from '../components/popupComp.vue'
+	import confirmComp from '../components/confirmComp.vue'
+
+	export default {
+		data() {
+			return {
+				isShowPopup: false,
+				checked: '',
+				isAdmin: false,
+				showConfirm: false,
+				exitText: '确定退出当前用户？'
+			}
+		},
+		computed: {
+			studentName() {
+				return this.$store.state.loginInfo.name
+			},
+			subjectList() {
+				return this.$store.state.subjectList
+			},
+			subjectChecked() {
+				return this.$store.state.subjectChecked
+			},
+			subjectCheckedName() {
+				var name = '.'
+				this.subjectList && this.subjectList.some((item) => {
+					if (item.subjectId == this.subjectChecked) {
+						name = item.subjectName
+						return true
+					}
+				})
+				return name
+			},
+			myExamSignUp() {
+				return this.$store.state.myExamSignUp || []
+			}
+		},
+		methods: {
+			showPopup(bool) {
+				this.isShowPopup = bool
+				this.checked = this.subjectChecked
+			},
+			submitSlt() {
+				this.$store.commit('setSubjectChecked', this.checked)
+				this.showPopup(!1)
+			},
+			showAdmin(bool) {
+				this.isAdmin = bool
+			},
+			cancelBespeak(id) {
+				this.$store.dispatch('cancelBespeak', id)
+			},
+			split(str) {
+				return str.replace(' ', '</br>')
+			},
+			sureExit() {
+				this.showConfirm = false
+				this.$router.replace('/login')
+				this.$store.commit('clearLoginInfo')
+			},
+			cancelExit() {
+				this.showConfirm = false
+			},
+			exitLogin() {
+				this.showConfirm = true
+			},
+			toLessonList() {
+				if (!this.subjectChecked) {
+					this.$store.commit('showConfirm', {text: '请选择科目'})
+					return false
+				}
+				this.$router.push('/lessonList')
+			}
+		},
+		created() {
+			this.$store.dispatch('getSubjectList')
+			this.$store.dispatch('getMyExamSignUp')
+		},
+		components: {
+			popupComp,
+			confirmComp
+		}
+	}
 </script>
 
 <style lang="scss" rel="stylesheet/scss">
     @import "../css/_base.scss";
+
     .indexPage {
         .topContainer {
             /*background: linear-gradient(to bottom right, #bad7ff , #7787ca);*/
             width: 100%;
             background: url('../img/indexTop.png') no-repeat;
             background-size: 100%;
+
             .flex:first-child {
                 height: 10rem;
                 box-sizing: border-box;
+
                 .img-wrap {
                     display: flex;
                     justify-content: center;
@@ -204,23 +215,27 @@
                     /*background-image: url('../img/indexTop.png');*/
                     /*background-size: cover;*/
                     display: flex;
+
                     .logo {
                         width: 7.15rem;
                         height: 7.15rem;
                         margin: 0 2.1rem;
                         align-self: center;
                     }
+
                     @media screen and (max-width: 374px) {
-                           .logo {
-                                width: 6.8rem;
-                                height: 6.8rem;
-                                margin: 0 1.8rem;
-                                align-self: center;
-                            }
+                        .logo {
+                            width: 6.8rem;
+                            height: 6.8rem;
+                            margin: 0 1.8rem;
+                            align-self: center;
                         }
+                    }
+
                     .text {
                         flex: 1;
                         align-self: center;
+
                         p {
                             font-size: 1.5rem;
                             color: #fff;
@@ -228,6 +243,7 @@
                             line-height: 2.3rem;
                             text-align: center;
                         }
+
                         @media screen and (max-width: 374px) {
                             p {
                                 font-size: 1.3rem;
@@ -238,6 +254,7 @@
                     }
                 }
             }
+
             .navItem {
                 margin-top: 1rem;
                 display: flex;
@@ -249,26 +266,32 @@
                 margin-bottom: 0.8rem;
                 box-sizing: border-box;
                 border-right: 0.1rem solid #fff;
+
                 span {
                     font-size: 1.2rem;
                     color: #fff;
                 }
             }
+
             .navItem:last-child {
                 border: none;
             }
+
             .flex:last-child i {
                 width: 3rem;
                 height: 3rem;
             }
         }
+
         .myExamSignUp {
             border-top: 0.5rem solid #f5f5f5;
             border-bottom: 0.5rem solid #f5f5f5;
+
             .header {
                 position: relative;
                 margin-bottom: 0.8rem;
             }
+
             h6 {
                 color: $cl-a;
                 padding-top: 1rem;
@@ -276,6 +299,7 @@
                 font-size: 1.4rem;
                 line-height: 1;
             }
+
             .admin {
                 position: absolute;
                 right: $padding/2;
@@ -284,6 +308,7 @@
                 bottom: 0;
                 color: #8e8e8e;
             }
+
             li {
                 position: relative;
                 display: flex;
@@ -297,17 +322,21 @@
                 overflow: hidden;
                 box-sizing: border-box;
             }
+
             li:first-child {
                 border-top: none;
             }
+
             .title {
                 width: 58%;
                 font-size: 1.2rem;
             }
+
             .date {
                 font-size: 1.2rem;
                 text-align: center;
             }
+
             .delete {
                 position: absolute;
                 right: -$padding/2;
@@ -324,13 +353,15 @@
                 line-height: 1.5rem;
             }
         }
+
         .menu {
-            .row{
+            .row {
                 display: flex;
                 flex-wrap: wrap;
                 justify-content: space-between;
                 padding: 0 $padding/2 1rem;
             }
+
             .item {
                 display: flex;
                 flex-direction: column;
@@ -347,6 +378,7 @@
                 box-sizing: border-box;
                 box-shadow: 0.1rem 0.1rem 0.2rem #e8e8e8;
             }
+
             .img-wrap_01,
             .img-wrap_02,
             .img-wrap_03,
@@ -360,25 +392,31 @@
                 background: #e4b379;
                 margin-bottom: 1rem;
             }
+
             .img-wrap_01 {
                 background: #c7000b;
             }
+
             .img-wrap_02 {
                 background: #6a84f2;
             }
+
             .img-wrap_03 {
                 background: #71c280;
             }
+
             .img-wrap_04 {
                 background: #6b4360;
             }
+
             i {
                 width: 66.66%;
                 height: 66.66%;
             }
         }
     }
-    .lesson{
+
+    .lesson {
         width: 93.75%;
         height: 5rem;
         box-shadow: 0 0.1rem 0.25rem #d4d4d4;
@@ -386,26 +424,31 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        &>img{
+
+        & > img {
             width: 3.8rem;
             height: 3.8rem;
             margin-right: 1rem;
         }
-        &>div{
+
+        & > div {
             font-weight: bold;
             line-height: 1.8rem;
-            :first-child{
+
+            :first-child {
                 font-size: 1.4rem;
                 color: #747474;
                 margin-top: 0.3rem;
             }
-            :last-child{
+
+            :last-child {
                 font-size: 1.2rem;
                 color: #cccccc;
             }
         }
     }
-    .exit{
+
+    .exit {
         font-size: 1.4rem;
         font-weight: bold;
         color: #1584da;
@@ -413,6 +456,7 @@
         margin: 3rem 0;
         text-decoration: underline;
     }
+
     .subjectSlt {
         display: flex;
         font-size: 1.3rem;
@@ -421,6 +465,7 @@
         justify-content: space-between;
         padding: 1rem $padding/2;
     }
+
     .subjectSlt .toSlt {
         flex: 1;
         margin-left: 4%;
@@ -436,23 +481,26 @@
         font-weight: 600;
         color: black;
     }
+
     .subjectSlt .toSlt:after {
         content: '';
         position: absolute;
         top: 50%;
         right: 0.8rem;
-        transform: translate3d(0,-50%,0);
+        transform: translate3d(0, -50%, 0);
         width: 0;
         height: 0;
         border-left: 0.4rem solid transparent;
         border-right: 0.4rem solid transparent;
         border-top: 0.8rem solid #d6d6d6;
     }
+
     .sltPopup {
         background: #fff;
         width: 25.6rem;
         border-radius: 1.2rem;
         overflow: hidden;
+
         .header {
             background: $cl-a;
             height: 5.4rem;
@@ -461,18 +509,22 @@
             line-height: 5.4rem;
             color: #fff;
         }
+
         .content {
             padding: 0.5rem 4%;
         }
-        label{
+
+        label {
             display: flex;
             align-items: center;
             font-size: 1.3rem;
             margin: 1rem 0;
+
             i {
                 margin-right: 0.8rem;
             }
         }
+
         .submit {
             background-color: #fff;
             border-top: 0.1rem solid #e8e8e8;
@@ -482,9 +534,11 @@
             line-height: 4.2rem;
         }
     }
+
     .slideRight-enter-active, .slideRight-leave-active {
         transition: transform .3s ease-out;
     }
+
     .slideRight-enter, .slideRight-leave-to {
         transform: translate3d(100%, 0, 0);
     }
