@@ -32,26 +32,16 @@ const store = new Vuex.Store({
             text: '',
             ok: null
         },
-<<<<<<< HEAD
-        Store_activeLesson: {}
-=======
         Store_actionLesson: {},
         Store_subjectId: ''
->>>>>>> kellen
     },
     mutations: {
         Store_refreshSubjectIdWhenActive(state,payload) {
             state.Store_subjectId = payload
         },
         Store_changeActiveLesson(state,payload) {
-<<<<<<< HEAD
-            state.Store_activeLesson = payload
-            console.log(state.Store_activeLesson)
-=======
             if (payload.activeIndex >= 0) state.Store_actionLesson.activeIndex = payload.activeIndex
             if (payload.activeList) state.Store_actionLesson.activeList = payload.activeList
-            console.log(state.Store_actionLesson)
->>>>>>> kellen
         },
         setLoginInfo (state, {id, name, token}) {
             state.loginInfo.id = id
