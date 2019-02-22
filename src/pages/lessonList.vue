@@ -67,7 +67,7 @@ export default {
         getSectionList() {
             let newChapterList = JSON.parse(JSON.stringify(this.chapterBigList))
             let promiseList = newChapterList.map(item => {
-                console.log(item)
+                // console.log(item)
                 return axios.post(REQ_SECTION_LIST,qs.stringify({chapterId: item.chapterId, studentId: this.loginInfo.id})).then(res => {
                     item.sectionList = res.data.data
                     item.spreadState = false

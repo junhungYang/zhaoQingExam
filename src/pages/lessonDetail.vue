@@ -26,28 +26,30 @@
 <script>
 	import axios from 'axios'
 	import qs from 'qs'
+	import { mapState } from 'vuex'
 
 	const REQ_LESSON_DETAIL = 'http://zqjtjx.yukedaonline.com/zqjtjx/common/explanation/getExplanationContent'
 	export default {
 		data() {
 			return {
 				lessonInfo: {},
-				showMask: false
+				showMask: false,
+				activeIndex: 0
 			}
 		},
 		created() {
+			if (!this.subjectChecked) return this.$router.replace('/')
+			this.activeIndex = this.$store.state.Store_actionLesson.activeIndex
 			this.getLessonDetail()
 		},
 		computed: {
+			...mapState(['subjectChecked']),
 			studentId() {
-				return this.$store.state.loginInfo.id
+				return this.$store.state.loginInfo.id || false
 			},
 			activeList() {
-				return this.$store.state.Store_actionLesson.activeList
+				return this.$store.state.Store_actionLesson.activeList || []
 			},
-			activeIndex() {
-				return this.$store.state.Store_actionLesson.activeIndex
-			}
 		},
 		methods: {
 			getLessonDetail() {
@@ -64,8 +66,9 @@
 					this.$store.commit('showConfirm', {text: '当前已经是第一节'})
 					return false
 				}
+				this.activeIndex -= 1
 				let payload = {
-					activeIndex: this.activeIndex - 1
+					activeIndex: this.activeIndex
 				}
 				this.$store.commit('Store_changeActiveLesson', payload)
 				this.getLessonDetail()
@@ -88,8 +91,9 @@
 					}
 					return false
 				}
+				this.activeIndex += 1
 				let payload = {
-					activeIndex: this.activeIndex + 1
+					activeIndex: this.activeIndex
 				}
 				this.$store.commit('Store_changeActiveLesson', payload)
 				this.getLessonDetail()
@@ -157,6 +161,11 @@
         .content {
             width: 100%;
             min-height: calc(100vh - 10rem);
+            overflow: hidden;
+
+            img {
+                max-width: 100%;
+            }
         }
 
         .next {
