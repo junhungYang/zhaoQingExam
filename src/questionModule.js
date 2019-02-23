@@ -66,7 +66,7 @@ const questionModule = {
         },
         setTestResult (state, data) {
             state.testResult = data
-            state.testResult.id = state.testId
+            // state.testResult.id = state.testId
         },
         setTotalFinished (state, num) {
             state.totalFinished = num

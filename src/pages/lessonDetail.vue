@@ -162,9 +162,8 @@
             width: 100%;
             min-height: calc(100vh - 10rem);
             overflow: hidden;
-
             img {
-                max-width: 100%;
+                max-width: 100% !important;
             }
         }
 

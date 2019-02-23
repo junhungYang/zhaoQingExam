@@ -2,7 +2,8 @@
     <div class="testEndPage">
         <header-b title="考试结果" home="."></header-b>
         <div class="result">
-            <div class="flex">
+            {{testResult}}
+            <!-- <div class="flex">
                 <div>
                     <span class="score">{{testResult.correctRate}}</span>
                     <span>正确率</span>
@@ -18,7 +19,7 @@
                 <router-link class="btn-b" to="/testInfo">再考一次</router-link>
                 <router-link class="btn-b" :to="'/test?testId=' + testResult.id">查阅试卷</router-link>
             </div>
-            <p class="remain">还剩考试次数为：<em>{{testResult.remainFrequency}}</em> 次。</p>
+            <p class="remain">还剩考试次数为：<em>{{testResult.remainFrequency}}</em> 次。</p> -->
         </div>
         <div class="list">
             <router-link class="flex-justify" to="/testRecord">
@@ -42,7 +43,7 @@
             }
         },
         created () {
-            if (!this.testResult.totalScore) {
+            if (!this.testResult) {
                 this.$router.replace('/')
             }
         },
@@ -58,43 +59,44 @@
         font-size: 1.2rem;
         padding: 0 $padding;
         border-bottom: 0.5rem solid #f5f5f5;
-    }
-    .testEndPage .result p {
-        margin-top: 1.4rem;
-    }
-    .testEndPage .result p em {
-        color: #8e8e8e;
-    }
-    .testEndPage .result .flex > div {
-        width: 50%;
-        margin: 2rem 0 0.6rem;
-    }
-    .testEndPage .result .flex > div:first-child {
-        border-right: 0.1rem solid #e8e8e8;
-    }
-    .testEndPage .result .flex span {
-        font-size: 1.2rem;
-        display: block;
         text-align: center;
     }
-    .testEndPage .result .flex .score {
-        font-size: 3rem;
-        color: $cl-a;
-        font-weight: bold;
-        margin-bottom: 0.3rem;
-        height: 3.5rem;
-    }
+    // .testEndPage .result p {
+    //     margin-top: 1.4rem;
+    // }
+    // .testEndPage .result p em {
+    //     color: #8e8e8e;
+    // }
+    // .testEndPage .result .flex > div {
+    //     width: 50%;
+    //     margin: 2rem 0 0.6rem;
+    // }
+    // .testEndPage .result .flex > div:first-child {
+    //     border-right: 0.1rem solid #e8e8e8;
+    // }
+    // .testEndPage .result .flex span {
+    //     font-size: 1.2rem;
+    //     display: block;
+    //     text-align: center;
+    // }
+    // .testEndPage .result .flex .score {
+    //     font-size: 3rem;
+    //     color: $cl-a;
+    //     font-weight: bold;
+    //     margin-bottom: 0.3rem;
+    //     height: 3.5rem;
+    // }
     .testEndPage .btnBox {
         display: flex;
         justify-content: space-between;
         margin: 2.2rem 10% 0;
     }
-    .testEndPage .result .remain {
-        margin: 0.8rem 4% 1.4rem;
-    }
-    .testEndPage .result .remain em {
-        color: $cl-a;
-    }
+    // .testEndPage .result .remain {
+    //     margin: 0.8rem 4% 1.4rem;
+    // }
+    // .testEndPage .result .remain em {
+    //     color: $cl-a;
+    // }
     .testEndPage .list .flex-justify {
         height: 4rem;
         align-items: center;
