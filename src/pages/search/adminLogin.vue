@@ -3,7 +3,7 @@
         <div class="logo-container">
             <img src="../../img/logo_04.png"/>
         </div>
-        <h1>安联后台查询系统</h1>
+        <h1>肇庆后台查询系统</h1>
         <div class="form-container">
             <div class="input-container">
                 <div class="icon-container">

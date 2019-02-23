@@ -4,7 +4,7 @@
         <div class="logo-container">
             <img src="../../img/logo_03.png" class="logo">
         </div>
-        <h3 class="company">安联安全生产培训有限公司</h3>
+        <h3 class="company">肇庆交通技工学校</h3>
         <div class="notice" v-html="notice"></div>
         <div class="lesson-container">
             <div class="header">
