@@ -162,8 +162,12 @@
             width: 100%;
             min-height: calc(100vh - 10rem);
             overflow: hidden;
-            img {
-                max-width: 100% !important;
+            p {
+                width: 100%;
+                font-size: 0;
+                img {
+                    max-width: 100% !important;
+                }
             }
         }
 
