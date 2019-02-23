@@ -2,7 +2,7 @@
     <div class="testEndPage">
         <header-b title="考试结果" home="."></header-b>
         <div class="result">
-            {{testResult}}
+            提交试卷成功
             <!-- <div class="flex">
                 <div>
                     <span class="score">{{testResult.correctRate}}</span>
@@ -60,6 +60,8 @@
         padding: 0 $padding;
         border-bottom: 0.5rem solid #f5f5f5;
         text-align: center;
+        height: 3rem;
+        line-height: 3rem;
     }
     // .testEndPage .result p {
     //     margin-top: 1.4rem;
