@@ -60,8 +60,8 @@
         padding: 0 $padding;
         border-bottom: 0.5rem solid #f5f5f5;
         text-align: center;
-        height: 3rem;
-        line-height: 3rem;
+        height: 1.5rem;
+        line-height: 1.5rem;
     }
     // .testEndPage .result p {
     //     margin-top: 1.4rem;
